@@ -1,7 +1,13 @@
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages()
+
+//DBContext
+builder.Services.AddDbContext<TaskDbContext>(options =>
+    options.UseSqlite("Data Source=Mission08db.db"));
 
 var app = builder.Build();
 
