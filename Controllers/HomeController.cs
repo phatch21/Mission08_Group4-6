@@ -12,6 +12,11 @@ namespace Mission08_Group4_6.Controllers
             return View();
         }
 
+        public IActionResult AddEditTask()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
