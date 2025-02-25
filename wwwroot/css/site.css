@@ -24,9 +24,43 @@ body {
 h1 {
   margin-bottom: 30px;
   text-align: center;
+  color: #06357a;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
+  text-align: center;
+  color: #06357a;
+}
+
+h5 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+p {
+  text-align: center;
+}
+
+.container {
+  background-color: #fcfaf8;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.custom-btn {
+  background-color: #06357a; /* Green */
+  color: white; /* White text */
+  padding: 10px 20px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px; /* Optional: Rounded corners */
+  transition: background 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #0077cc; /* Darker green on hover */
+  color: #ffffff;
 }
