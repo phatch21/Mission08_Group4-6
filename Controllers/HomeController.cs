@@ -48,7 +48,7 @@ namespace Mission08_Group4_6.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Task updatedTask)
+        public IActionResult Edit(NewTask updatedTask)
         {
             _context.Update(updatedTask);
             _context.SaveChanges();
@@ -66,7 +66,7 @@ namespace Mission08_Group4_6.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Task recordToDelete)
+        public IActionResult Delete(NewTask recordToDelete)
         {
             _context.Tasks.Remove(recordToDelete);
             _context.SaveChanges();
