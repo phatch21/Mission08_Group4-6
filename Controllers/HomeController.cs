@@ -24,7 +24,7 @@ namespace Mission08_Group4_6.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddEditTask(Models.Task model)
+        public IActionResult AddEditTask(Models.NewTask model)
         {
             if (ModelState.IsValid) // Validate the form input
             {

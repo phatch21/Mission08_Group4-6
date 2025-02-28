@@ -2,7 +2,7 @@
 
 namespace Mission08_Group4_6.Models
 {
-    public class Task
+    public class NewTask
     {
         [Key]
         public int Id { get; set; }
