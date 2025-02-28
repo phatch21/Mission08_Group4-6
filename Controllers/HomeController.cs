@@ -15,8 +15,16 @@ namespace Mission08_Group4_6.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var tasks = _context.Tasks.ToList(); // Fetch tasks from DB
+
+            if (tasks == null) // Ensure Model is never null
+            {
+                tasks = new List<NewTask>();
+            }
+
+            return View(tasks);
         }
+
 
         public IActionResult AddEditTask()
         {
