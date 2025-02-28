@@ -6,16 +6,34 @@ namespace Mission08_Group4_6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly TaskDbContext _context; // Injecting DB Context
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(TaskDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult AddEditTask()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddEditTask(Models.NewTask model)
+        {
+            if (ModelState.IsValid) // Validate the form input
+            {
+                _context.Tasks.Add(model); // Save to the database
+                _context.SaveChanges(); // Commit the changes
+                return RedirectToAction("Index"); // Redirect to main page
+            }
+
+            return View(model); // Return view with errors if validation fails
         }
 
         public IActionResult Privacy()
