@@ -6,7 +6,7 @@ namespace Mission08_Group4_6.Models
 {
     public class TaskDbContext : DbContext
     {
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<NewTask> Tasks { get; set; }
 
         public TaskDbContext(DbContextOptions<TaskDbContext> options) : base(options) { }
     }
