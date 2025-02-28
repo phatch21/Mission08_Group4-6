@@ -28,5 +28,32 @@ namespace Mission08_Group4_6.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult Edit(Task updatedTask)
+        {
+            _context.Update(updatedTask);
+            _context.SaveChanges();
+            
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var recordToDelete = _context.Tasks
+                .Single(x => x.Id == id);
+            
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Task recordToDelete)
+        {
+            _context.Tasks.Remove(recordToDelete);
+            _context.SaveChanges();
+        
+            return RedirectToAction("Index");
+        }
     }
 }
