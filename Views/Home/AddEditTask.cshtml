@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@{
+    ViewData["Title"] = "Add Task";
+}
+
+@model Task
+
+<div class="text-center">
+
+    <!--Put in inputs for the user-->
+    <h1>Enter Task:</h1>
+    <br />
+
+    <form method="post">
+
+
+        <label asp-for="Task">Task</label>
+        <input asp-for="Task" required />
+        <br /><br />
+
+       
+        <label asp-for="DueDate">Due Date</label>
+        <input asp-for="DueDate" type="datetime"/>
+        <br /><br />
+        
+        <label asp-for="Quadrant">Quadrant</label>
+        <select asp-for="Quadrant">
+
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+
+        </select>
+        <br /><br />
+
+        <label asp-for="Category" required>Category</label>
+        <select asp-for="Category">
+
+            <option value="Home">Home</option>
+            <option value="School">School</option>
+            <option value="Work">Work</option>
+            <option value="Church">Church</option>
+
+        </select>
+        <br /><br />
+        <label asp-for="Completed">Completed?</label>
+        <div>
+            <input type="radio" asp-for="Completed" value="true" id="completed-yes" />
+            <label for="edited-yes">Yes</label>
+
+            <input type="radio" asp-for="Completed" value="false" id="completed-no" />
+            <label for="edited-no">No</label>
+        </div>
+
+        <button type="submit">Submit</button>
+
+        <div asp-validation-summary="All"></div>
+
+    </form>
+
+
+</div>
