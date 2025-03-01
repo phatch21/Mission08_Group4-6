@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mission08_Group4_6.Models;
@@ -26,7 +26,7 @@ namespace Mission08_Group4_6.Controllers
         [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
-            ViewBag.Categories = _context.Categories.ToList(); // Reload categories if validation fails
+            ViewBag.Categories = _context.Categories.ToList(); // ✅ Ensure Categories are loaded
 
             if (id == null || id == 0)
             {
@@ -38,9 +38,10 @@ namespace Mission08_Group4_6.Controllers
             {
                 return NotFound();
             }
-            
+
             return View(task); // Editing an existing task
         }
+
 
         [HttpPost]
         public IActionResult AddEditTask(NewTask model)
