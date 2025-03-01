@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Group4_6.Models;
 using System.Linq;
 
@@ -21,8 +22,11 @@ namespace Mission08_Group4_6.Controllers
             return View(tasks);
         }
 
+        [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
+            ViewBag.Categories = _context.Categories.ToList(); // Reload categories if validation fails
+
             if (id == null || id == 0)
             {
                 return View(new NewTask()); // Creating a new task
@@ -33,10 +37,11 @@ namespace Mission08_Group4_6.Controllers
             {
                 return NotFound();
             }
+
             return View(task);
+
         }
 
-        // ? Save (Add or Update) Task
         [HttpPost]
         public IActionResult AddEditTask(NewTask model)
         {
@@ -58,18 +63,50 @@ namespace Mission08_Group4_6.Controllers
             return View(model);
         }
 
-        // ? Edit Task
-        [HttpPost]
-        public IActionResult Edit(NewTask updatedTask)
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            
+            var taskToEdit = _context.Tasks
+                .Include(x => x.Category)
+                .Single(x => x.Id == id);  
+            
+            var tasks = _context.Tasks.ToList();
+            
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("Index", tasks);
+            
+        }
+
+
+        // ? Edit Task
+
+        [HttpPost]
+        public IActionResult Edit(NewTask model)
+        {
+
+            _context.Tasks.Update(model);
+            _context.SaveChanges();
+            
+
             if (updatedTask != null)
             {
                 _taskRepository.Update(updatedTask); // FIXED: Use _taskRepository
                 _taskRepository.Save();
             }
 
+
             return RedirectToAction("Index");
         }
+        
+        
 
         // ? Delete Task (GET Confirmation)
         [HttpGet]
@@ -113,7 +150,6 @@ namespace Mission08_Group4_6.Controllers
             return RedirectToAction("Index");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
