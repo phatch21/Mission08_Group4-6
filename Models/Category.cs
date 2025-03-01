@@ -1,3 +1,4 @@
+
 ﻿namespace Mission08_Group4_6.Models
 {
     public class Category
@@ -6,3 +7,4 @@
         public string Name { get; set; }
     }
 }
+
