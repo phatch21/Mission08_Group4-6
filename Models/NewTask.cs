@@ -16,19 +16,14 @@ namespace Mission08_Group4_6.Models
         [Range(1, 4, ErrorMessage = "Quadrant must be between 1 and 4.")]
         public int Quadrant { get; set; }
 
+        // CategoryId as a foreign key to Categories table
         [Required]
-        [EnumDataType(typeof(TaskCategory))]
-        public TaskCategory Category { get; set; }
+        public int CategoryId { get; set; }
+
+        // Navigation property to Category (optional)
+        public Category Category { get; set; }
 
         [Required]
         public bool Completed { get; set; } = false;
-    }
-
-    public enum TaskCategory
-    {
-        Home,
-        School,
-        Work,
-        Church
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Mission08_Group4_6.Models; 
+using Mission08_Group4_6.Models;
 
 namespace Mission08_Group4_6.Models
 {
