@@ -61,7 +61,6 @@ namespace Mission08_Group4_6.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Categories = _context.Categories.ToList(); // Reload categories if validation fails
             return View(model);
         }
 
