@@ -30,20 +30,22 @@
         </div>
         <div style="border: 2px solid #f0e7dc; border-radius: 10px; padding: 10px;" class="col-5">
             <h5>Quadrant 1</h5>
-            @foreach (var x in Model.Where(x => x.Quadrant == 1))
+            @foreach (var x in Model.Where(x => x.Quadrant == 1 && x.Completed == false))
             {
                 <p>@x.TaskName</p>
                 <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.Id">Edit</a>
                 <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+                <a class="btn btn-info" asp-controller="Home" asp-action="Checkoff" asp-route-id="@x.Id">Mark As Complete</a>
             }
         </div>
         <div style="border: 2px solid #f0e7dc; border-radius: 10px; padding: 10px;" class="col-5">
             <h5>Quadrant 2</h5>
-            @foreach (var x in Model.Where(x => x.Quadrant == 2))
+            @foreach (var x in Model.Where(x => x.Quadrant == 2 && x.Completed == false))
             {
                 <p>@x.TaskName</p>
                 <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.Id">Edit</a>
                 <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+                <a class="btn btn-info" asp-controller="Home" asp-action="Checkoff" asp-route-id="@x.Id">Mark As Complete</a>
             }
         </div>
     </div>
@@ -54,20 +56,22 @@
         </div>
         <div style="border: 2px solid #f0e7dc; border-radius: 10px; padding: 10px;" class="col-5">
             <h5>Quadrant 3</h5>
-            @foreach (var x in Model.Where(x => x.Quadrant == 3))
+            @foreach (var x in Model.Where(x => x.Quadrant == 3 && x.Completed == false))
             {
                 <p>@x.TaskName</p>
                 <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.Id">Edit</a>
                 <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+                <a class="btn btn-info" asp-controller="Home" asp-action="Checkoff" asp-route-id="@x.Id">Mark As Complete</a>
             }
         </div>
         <div style="border: 2px solid #f0e7dc; border-radius: 10px; padding: 10px;" class="col-5">
             <h5>Quadrant 4</h5>
-            @foreach (var x in Model.Where(x => x.Quadrant == 4))
+            @foreach (var x in Model.Where(x => x.Quadrant == 4 && x.Completed == false))
             {
                 <p>@x.TaskName</p>
                 <a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.Id">Edit</a>
                 <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@x.Id">Delete</a>
+                <a class="btn btn-info" asp-controller="Home" asp-action="Checkoff" asp-route-id="@x.Id">Mark As Complete</a>
             }
         </div>
     </div>

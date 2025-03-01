@@ -81,6 +81,11 @@ namespace Mission08_Group4_6.Controllers
         
             return RedirectToAction("Index");
         }
+
+        public IActionResult Checkoff(int id)
+        {
+            return View("Index");
+        }
     }
 }
 
