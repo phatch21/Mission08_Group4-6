@@ -18,10 +18,11 @@ public class TaskRepository : ITaskRepository
     }
 
     // Implement GetTaskById method
-    public NewTask GetTaskById(int id)
+    public NewTask? GetTaskById(int id)
     {
-        return _context.Tasks.Find(id);
+        return _context.Tasks.Find(id) ?? throw new InvalidOperationException("Task not found");
     }
+
 
     // Implement Add method
     public void Add(NewTask task)

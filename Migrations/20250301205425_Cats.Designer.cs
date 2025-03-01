@@ -11,8 +11,8 @@ using Mission08_Group4_6.Models;
 namespace Mission08_Group4_6.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    [Migration("20250301070057_SeedCategories")]
-    partial class SeedCategories
+    [Migration("20250301205425_Cats")]
+    partial class Cats
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

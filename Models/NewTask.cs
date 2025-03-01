@@ -1,31 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Mission08_Group4_6.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace Mission08_Group4_6.Models
+public class NewTask
 {
-    public class NewTask
+    public NewTask()
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        public string TaskName { get; set; }
-
-        public DateTime? DueDate { get; set; }
-
-        [Required]
-        [Range(1, 4, ErrorMessage = "Quadrant must be between 1 and 4.")]
-        public int Quadrant { get; set; }
-
-        // CategoryId as a foreign key to Categories table
-        [Required]
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
-
-        // Navigation property to Category (optional)
-        public Category Category { get; set; }
-
-        [Required]
-        public bool Completed { get; set; } = false;
+        CategoryId = 0; // Ensure it has a default value
+        TaskName = string.Empty; // Prevents null issues
     }
+
+    [Key]
+    public int Id { get; set; }
+
+    [Required]
+    public string TaskName { get; set; } = string.Empty; // Ensures it is never null
+
+    public DateTime? DueDate { get; set; }
+
+    [Required]
+    [Range(1, 4, ErrorMessage = "Quadrant must be between 1 and 4.")]
+    public int Quadrant { get; set; }
+
+    [Required]
+    [ForeignKey("Category")]
+    public int CategoryId { get; set; }
+
+    public Category? Category { get; set; } // Made nullable to prevent binding issues
+
+    [Required]
+    public bool Completed { get; set; } = false;
 }
