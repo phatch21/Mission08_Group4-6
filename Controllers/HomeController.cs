@@ -24,7 +24,8 @@ namespace Mission08_Group4_6.Controllers
         [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
-            // Use the task repository, no need for _context
+            ViewBag.Categories = _taskRepository.GetAllCategories().ToList(); // Fetch categories from the repository
+
             if (id == null || id == 0)
             {
                 return View(new NewTask()); // Creating a new task
@@ -38,6 +39,7 @@ namespace Mission08_Group4_6.Controllers
 
             return View(task);
         }
+
 
         [HttpPost]
         public IActionResult AddEditTask(NewTask model)
