@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mission08_Group4_6.Models;
@@ -23,8 +23,11 @@ namespace Mission08_Group4_6.Controllers
             return View(tasks);
         }
 
+        [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
+            ViewBag.Categories = _context.Categories.ToList(); // ✅ Ensure Categories are loaded
+
             if (id == null || id == 0)
             {
                 return View(new NewTask()); // Creating a new task
@@ -35,8 +38,10 @@ namespace Mission08_Group4_6.Controllers
             {
                 return NotFound();
             }
+
             return View(task); // Editing an existing task
         }
+
 
         [HttpPost]
         public IActionResult AddEditTask(NewTask model)
@@ -134,10 +139,5 @@ namespace Mission08_Group4_6.Controllers
             return RedirectToAction("Index");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
