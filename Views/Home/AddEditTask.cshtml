@@ -13,10 +13,14 @@
 <div class="container mt-4" style="max-width: 600px;">
     <form asp-action="AddEditTask" method="post" class="row g-3">
 
+
+        <input type="hidden" asp-for="Id"/>
+
+
         <div class="row">
             <div class="col-12">
-                <label for="TaskName" class="form-label">Task Name</label>
-                <input type="text" id="TaskName" name="TaskName" class="form-control" required />
+                <label asp-for="TaskName" class="form-label">Task Name</label>
+                <input type="text"  asp-for="TaskName" class="form-control" required />
             </div>
         </div>
 
@@ -24,8 +28,8 @@
 
         <div class="row">
             <div class="col-12">
-                <label for="DueDate" class="form-label">Due Date</label>
-                <input type="datetime-local" id="DueDate" name="DueDate" class="form-control"
+                <label asp-for="DueDate" class="form-label">Due Date</label>
+                <input type="datetime-local"  asp-for="DueDate" class="form-control"
                        value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
             </div>
         </div>
@@ -34,8 +38,8 @@
 
         <div class="row">
             <div class="col-12">
-                <label for="Quadrant" class="form-label">Quadrant</label>
-                <select id="Quadrant" name="Quadrant" class="form-select" required>
+                <label asp-for="Quadrant" class="form-label">Quadrant</label>
+                <select asp-for="Quadrant" class="form-select" required>
                     <option value="">Select Quadrant</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -49,13 +53,15 @@
 
         <div class="row">
             <div class="col-12">
-                <label for="Category" class="form-label">Category</label>
-                <select id="Category" name="Category" class="form-select" required>
+                <label asp-forfor="Category" class="form-label">Category</label>
+                <select asp-for="Category" class="form-select" required>
                     <option value="">Select Category</option>
-                    <option value="Home">Home</option>
-                    <option value="School">School</option>
-                    <option value="Work">Work</option>
-                    <option value="Church">Church</option>
+                    <option value ="Church">Category</option>
+                    <!--create a drop down using the categories in the viewbag-->
+                    @* @foreach (Category c in ViewBag.Categories) *@
+                    @* { *@
+                    @*     <option value="@c.CategoryId">@c.CategoryName</option> *@
+                    @* } *@
                 </select>
             </div>
         </div>
@@ -66,11 +72,11 @@
             <div class="col-12">
                 <label class="form-label">Completed?</label>
                 <div class="form-check">
-                    <input type="radio" name="Completed" value="true" id="CompletedYes" class="form-check-input" required>
+                    <input type="radio" asp-for="Completed" value="true" id="CompletedYes" class="form-check-input" required>
                     <label for="CompletedYes" class="form-check-label">Yes</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" name="Completed" value="false" id="CompletedNo" class="form-check-input" checked required>
+                    <input type="radio" asp-for="Completed" value="false" id="CompletedNo" class="form-check-input" checked required>
                     <label for="CompletedNo" class="form-check-label">No</label>
                 </div>
             </div>
@@ -84,5 +90,7 @@
             </div>
         </div>
 
+
+        <div asp-validation-summary="All"></div>
     </form>
 </div>
