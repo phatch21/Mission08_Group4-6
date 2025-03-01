@@ -56,12 +56,13 @@
                 <label asp-forfor="Category" class="form-label">Category</label>
                 <select asp-for="Category" class="form-select" required>
                     <option value="">Select Category</option>
-                    
+                    <option value ="Church">Category</option>
                     <!--create a drop down using the categories in the viewbag-->
                     @foreach (Category c in ViewBag.Categories) *@
-                    @* { *@
-                    @*     <option value="@c.Id">@c.Name</option> *@
-                    @* }
+                     { 
+                         <option value="@c.Id">@c.Name</option> 
+                     }
+
                 </select>
             </div>
         </div>
