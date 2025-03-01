@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Group4_6.Models;
 
 namespace Mission08_Group4_6.Controllers
@@ -56,13 +57,30 @@ namespace Mission08_Group4_6.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(NewTask updatedTask)
+        public IActionResult Edit(int id)
         {
-            _context.Update(updatedTask);
+            
+            var taskToEdit = _context.Tasks
+                .Include(x => x.Category)
+                .Single(x => x.Id == id);  
+            
+            var tasks = _context.Tasks.ToList();
+            
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("Index", tasks);
+            
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NewTask model)
+        {
+            _context.Tasks.Update(model);
             _context.SaveChanges();
             
             return RedirectToAction("Index");
         }
+        
+        
 
         [HttpGet]
         public IActionResult Delete(int id)
