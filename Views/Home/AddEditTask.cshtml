@@ -1,97 +1,72 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@{
-    ViewData["Title"] = "Add Task";
-}
-
-@model NewTask
+﻿@model NewTask
 
 <div class="container mt-4" style="max-width: 600px;">
     <form asp-action="AddEditTask" method="post" class="row g-3">
+        <input type="hidden" asp-for="Id" />
 
-
-        <input type="hidden" asp-for="Id"/>
-
-
-        <div class="row">
-            <div class="col-12">
-                <label asp-for="TaskName" class="form-label">Task Name</label>
-                <input type="text"  asp-for="TaskName" class="form-control" required />
-            </div>
+        <!-- Task Name -->
+        <div class="col-12">
+            <label asp-for="TaskName" class="form-label" for="TaskName">Task Name</label>
+            <input type="text" asp-for="TaskName" id="TaskName" class="form-control" required />
+            <span asp-validation-for="TaskName" class="text-danger"></span>
         </div>
 
-        <br />
-
-        <div class="row">
-            <div class="col-12">
-                <label asp-for="DueDate" class="form-label">Due Date</label>
-                <input type="datetime-local"  asp-for="DueDate" class="form-control"
-                       value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
-            </div>
+        <!-- Due Date -->
+        <div class="col-12">
+            <label asp-for="DueDate" class="form-label" for="DueDate">Due Date</label>
+            <input type="datetime-local" asp-for="DueDate" id="DueDate" class="form-control" required />
+            <span asp-validation-for="DueDate" class="text-danger"></span>
         </div>
 
-        <br />
-
-        <div class="row">
-            <div class="col-12">
-                <label asp-for="Quadrant" class="form-label">Quadrant</label>
-                <select asp-for="Quadrant" class="form-select" required>
-                    <option value="">Select Quadrant</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
+        <!-- Quadrant -->
+        <div class="col-12">
+            <label asp-for="Quadrant" class="form-label" for="Quadrant">Quadrant</label>
+            <select asp-for="Quadrant" id="Quadrant" class="form-select" required>
+                <option value="">Select Quadrant</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <span asp-validation-for="Quadrant" class="text-danger"></span>
         </div>
 
-        <br />
-
-        <div class="row">
-            <div class="col-12">
-                <label asp-forfor="Category" class="form-label">Category</label>
-                <select asp-for="Category" class="form-select" required>
-                    <option value="">Select Category</option>
-                    
-                    <!--create a drop down using the categories in the viewbag-->
-                    @foreach (Category c in ViewBag.Categories)
-                     { 
-                         <option value="@c.Id">@c.Name</option> 
-                     }
-
-                </select>
-            </div>
-        </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-12">
-                <label class="form-label">Completed?</label>
-                <div class="form-check">
-                    <input type="radio" asp-for="Completed" value="true" id="CompletedYes" class="form-check-input" required>
-                    <label for="CompletedYes" class="form-check-label">Yes</label>
-                </div>
-                <div class="form-check">
-                    <input type="radio" asp-for="Completed" value="false" id="CompletedNo" class="form-check-input" checked required>
-                    <label for="CompletedNo" class="form-check-label">No</label>
-                </div>
-            </div>
-        </div>
-
-        <br />
-
-        <div class="row">
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
-            </div>
+        <div class="col-12">
+            <label for="CategoryId" class="form-label">Category</label>
+            <select asp-for="CategoryId" id="CategoryId" class="form-select" required>
+                <option value="">Select Category</option>
+                @if (ViewBag.Categories != null)
+                {
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
         </div>
 
 
-        <div asp-validation-summary="All"></div>
+        <!-- Completed -->
+        <div class="col-12">
+            <label class="form-label">Completed?</label>
+            <div class="form-check">
+                <input type="radio" asp-for="Completed" value="true" id="CompletedYes" class="form-check-input" required>
+                <label for="CompletedYes" class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" asp-for="Completed" value="false" id="CompletedNo" class="form-check-input" checked required>
+                <label for="CompletedNo" class="form-check-label">No</label>
+            </div>
+            <span asp-validation-for="Completed" class="text-danger"></span>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
+        </div>
+
+        <!-- Validation Summary -->
+        <div asp-validation-summary="All" class="text-danger"></div>
     </form>
 </div>
