@@ -22,8 +22,11 @@ namespace Mission08_Group4_6.Controllers
             return View(tasks);
         }
 
+        [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
+            ViewBag.Categories = _context.Categories.ToList(); // Reload categories if validation fails
+
             if (id == null || id == 0)
             {
                 return View(new NewTask()); // Creating a new task
@@ -34,6 +37,7 @@ namespace Mission08_Group4_6.Controllers
             {
                 return NotFound();
             }
+            
             return View(task); // Editing an existing task
         }
 
