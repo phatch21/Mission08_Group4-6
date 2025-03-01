@@ -60,7 +60,7 @@ namespace Mission08_Group4_6.Controllers
         {
             _context.Update(updatedTask);
             _context.SaveChanges();
-            
+
             return RedirectToAction("Index");
         }
 
@@ -69,7 +69,7 @@ namespace Mission08_Group4_6.Controllers
         {
             var recordToDelete = _context.Tasks
                 .Single(x => x.Id == id);
-            
+
             return View(recordToDelete);
         }
 
@@ -78,7 +78,7 @@ namespace Mission08_Group4_6.Controllers
         {
             _context.Tasks.Remove(recordToDelete);
             _context.SaveChanges();
-        
+
             return RedirectToAction("Index");
         }
 
