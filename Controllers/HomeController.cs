@@ -44,7 +44,7 @@ namespace Mission08_Group4_6.Controllers
         {
             if (ModelState.IsValid) // Validate the form input
             {
-                if (model.TaskId == 0)
+                if (model.Id == 0)
                 {
                     _taskRepository.Add(model); // Add new task
                 }

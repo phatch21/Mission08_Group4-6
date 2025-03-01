@@ -5,7 +5,7 @@ namespace Mission08_Group4_6.Models
     public class NewTask
     {
         [Key]
-        public int TaskId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string TaskName { get; set; }
