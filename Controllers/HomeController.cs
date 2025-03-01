@@ -24,13 +24,14 @@ namespace Mission08_Group4_6.Controllers
         [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
-            
-            ViewBag.Categories = _context.Categories.ToList(); // Reload categories if validation fails
 
+            ViewBag.Categories = _taskRepository.GetAllCategories()
+                .Select(c => new { Id = c.Id, Name = c.Name }) // Ensuring only relevant properties
+                .ToList();
 
             if (id == null || id == 0)
             {
-                return View(new NewTask()); // Creating a new task
+                return View(new NewTask());
             }
 
             var task = _taskRepository.GetTaskById(id.Value);
@@ -39,29 +40,33 @@ namespace Mission08_Group4_6.Controllers
                 return NotFound();
             }
 
-
             return View(task);
-
         }
+
 
 
         [HttpPost]
         public IActionResult AddEditTask(NewTask model)
         {
-            if (ModelState.IsValid) // Validate the form input
+            if (ModelState.IsValid)
             {
                 if (model.Id == 0)
                 {
-                    _taskRepository.Add(model); // Add new task
+                    _taskRepository.Add(model);
                 }
                 else
                 {
-                    _taskRepository.Update(model); // Update existing task
+                    _taskRepository.Update(model);
                 }
 
                 _taskRepository.Save();
                 return RedirectToAction("Index");
             }
+
+            // Repopulate categories if validation fails
+            ViewBag.Categories = _taskRepository.GetAllCategories()
+                .Select(c => new { Id = c.Id, Name = c.Name })
+                .ToList();
 
             return View(model);
         }

@@ -30,6 +30,28 @@ namespace Mission08_Group4_6.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Home"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "School"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Work"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Church"
+                        });
                 });
 
             modelBuilder.Entity("Mission08_Group4_6.Models.NewTask", b =>
