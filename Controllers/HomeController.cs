@@ -81,30 +81,33 @@ namespace Mission08_Group4_6.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            
-            var taskToEdit = _context.Tasks
-                .Include(x => x.Category)
-                .Single(x => x.Id == id);  
-            
-            var tasks = _context.Tasks.ToList();
-            
-            ViewBag.Categories = _context.Categories.ToList();
-            
-            return View("Index", tasks);
-            
+            var taskToEdit = _taskRepository.GetTaskById(id);
+
+            if (taskToEdit == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Categories = _taskRepository.GetAllCategories().ToList();
+
+            return View(taskToEdit);
         }
+
 
         [HttpPost]
         public IActionResult Edit(NewTask model)
         {
-            _context.Tasks.Update(model);
-            _context.SaveChanges();
-            
+            if (ModelState.IsValid)
+            {
+                _taskRepository.Update(model);
+                _taskRepository.Save();
+            }
 
             return RedirectToAction("Index");
         }
-        
-        
+
+
+
         // ? Delete Task (GET Confirmation)
         [HttpGet]
         public IActionResult Delete(int id)
