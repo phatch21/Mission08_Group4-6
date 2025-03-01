@@ -44,11 +44,7 @@ namespace Mission08_Group4_6.Controllers
             return View(model); // Return view with errors if validation fails
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
