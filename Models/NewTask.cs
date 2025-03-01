@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission08_Group4_6.Models
 {
@@ -18,6 +19,7 @@ namespace Mission08_Group4_6.Models
 
         // CategoryId as a foreign key to Categories table
         [Required]
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         // Navigation property to Category (optional)
