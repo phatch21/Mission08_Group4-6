@@ -1,41 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
-@{
-    ViewData["Title"] = "Add Task";
-}
-
-@model NewTask
+﻿@model NewTask
 
 <div class="container mt-4" style="max-width: 600px;">
     <form asp-action="AddEditTask" method="post" class="row g-3">
+        <input type="hidden" asp-for="Id" />
 
-
-        <input type="hidden" asp-for="Id"/>
-
-
+        <!-- Task Name -->
         <div class="row">
             <div class="col-12">
                 <label asp-for="TaskName" class="form-label">Task Name</label>
-                <input type="text"  asp-for="TaskName" class="form-control" required />
+                <input type="text" asp-for="TaskName" class="form-control" required />
             </div>
         </div>
 
         <br />
 
+        <!-- Due Date -->
         <div class="row">
             <div class="col-12">
                 <label asp-for="DueDate" class="form-label">Due Date</label>
-                <input type="datetime-local"  asp-for="DueDate" class="form-control"
+                <input type="datetime-local" asp-for="DueDate" class="form-control"
                        value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
             </div>
         </div>
 
         <br />
 
+        <!-- Quadrant -->
         <div class="row">
             <div class="col-12">
                 <label asp-for="Quadrant" class="form-label">Quadrant</label>
@@ -51,24 +41,25 @@
 
         <br />
 
+        <!-- Category -->
         <div class="row">
             <div class="col-12">
-                <label asp-forfor="Category" class="form-label">Category</label>
-                <select asp-for="Category" class="form-select" required>
+                <label asp-for="CategoryId" class="form-label">Category</label>
+                <select asp-for="CategoryId" class="form-select" required>
                     <option value="">Select Category</option>
-                    
-                    <!--create a drop down using the categories in the viewbag-->
-                    @foreach (Category c in ViewBag.Categories)
-                     { 
-                         <option value="@c.Id">@c.Name</option> 
-                     }
 
+                    <!-- Loop through categories passed from ViewBag -->
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
                 </select>
             </div>
         </div>
 
         <br />
 
+        <!-- Completed -->
         <div class="row">
             <div class="col-12">
                 <label class="form-label">Completed?</label>
@@ -85,12 +76,12 @@
 
         <br />
 
+        <!-- Submit Button -->
         <div class="row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary w-100">Submit</button>
             </div>
         </div>
-
 
         <div asp-validation-summary="All"></div>
     </form>
