@@ -58,7 +58,7 @@
                     <option value="">Select Category</option>
                     <option value ="Church">Category</option>
                     <!--create a drop down using the categories in the viewbag-->
-                    @foreach (Category c in ViewBag.Categories) *@
+                    @foreach (Category c in ViewBag.Categories)
                      { 
                          <option value="@c.Id">@c.Name</option> 
                      }
