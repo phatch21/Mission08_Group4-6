@@ -11,8 +11,8 @@ using Mission08_Group4_6.Models;
 namespace Mission08_Group4_6.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    [Migration("20250228231957_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20250301062552_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
