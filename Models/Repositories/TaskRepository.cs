@@ -20,21 +20,24 @@ public class TaskRepository : ITaskRepository
     // Implement GetTaskById method
     public NewTask? GetTaskById(int id)
     {
-        return _context.Tasks.Find(id) ?? throw new InvalidOperationException("Task not found");
+        return _context.Tasks.Find(id); // Now null values are allowed
     }
-
 
     // Implement Add method
     public void Add(NewTask task)
     {
         _context.Tasks.Add(task);
+        _context.SaveChanges(); // Ensure changes are saved
     }
+
 
     // Implement Update method
     public void Update(NewTask task)
     {
         _context.Tasks.Update(task);
+        _context.SaveChanges(); // Ensure updates are committed
     }
+
 
     // Implement Delete method
     public void Delete(int id)
@@ -43,8 +46,10 @@ public class TaskRepository : ITaskRepository
         if (task != null)
         {
             _context.Tasks.Remove(task);
+            _context.SaveChanges(); // Ensure the deletion is committed
         }
     }
+
 
     // Implement Save method
     public void Save()
