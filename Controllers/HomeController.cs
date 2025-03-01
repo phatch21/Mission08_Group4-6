@@ -23,8 +23,12 @@ namespace Mission08_Group4_6.Controllers
             return View(tasks);
         }
 
+        [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
+            
+            ViewBag.Categories = _context.Categories.ToList(); // Reload categories if validation fails
+
             if (id == null || id == 0)
             {
                 return View(new NewTask()); // Creating a new task
@@ -78,6 +82,7 @@ namespace Mission08_Group4_6.Controllers
             var tasks = _context.Tasks.ToList();
             
             ViewBag.Categories = _context.Categories.ToList();
+            
             return View("Index", tasks);
             
         }
@@ -134,11 +139,6 @@ namespace Mission08_Group4_6.Controllers
 
             return RedirectToAction("Index");
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        
     }
 }
