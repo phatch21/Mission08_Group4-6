@@ -18,10 +18,10 @@ namespace Mission08_Group4_6.Controllers
         // ? Display Task List
         public IActionResult Index()
         {
-            var tasks = _context.Tasks.Include(t => t.Category).ToList(); // Include category data
-
+            var tasks = _context.Tasks?.ToList() ?? new List<NewTask>(); // Remove Category reference
             return View(tasks);
         }
+
         public IActionResult AddEditTask(int? id)
         {
             if (id == null || id == 0)
