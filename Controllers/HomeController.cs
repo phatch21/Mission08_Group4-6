@@ -24,7 +24,9 @@ namespace Mission08_Group4_6.Controllers
         [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
+
             ViewBag.Categories = _taskRepository.GetAllCategories().ToList(); // Fetch categories from the repository
+
 
             if (id == null || id == 0)
             {
@@ -37,7 +39,9 @@ namespace Mission08_Group4_6.Controllers
                 return NotFound();
             }
 
+
             return View(task);
+
         }
 
 
@@ -104,10 +108,12 @@ namespace Mission08_Group4_6.Controllers
             return RedirectToAction("Index");
         }
 
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }
