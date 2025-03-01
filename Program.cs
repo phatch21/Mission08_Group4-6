@@ -8,7 +8,7 @@ builder.Services.AddRazorPages();
 
 //DBContext
 builder.Services.AddDbContext<TaskDbContext>(options =>
-    options.UseSqlite("Data Source=Mission08db.db"));
+    options.UseSqlite("Data Source=Mission8db.db"));
 
 var app = builder.Build();
 
