@@ -10,61 +10,88 @@
 
 @model NewTask
 
-<div class="text-center">
+<div class="container mt-4" style="max-width: 600px;">
+    <form asp-action="AddEditTask" method="post" class="row g-3">
 
-    <!--Put in inputs for the user-->
-    <h1>Enter Task:</h1>
-    <br />
 
-    <form method="post">
+        <input type="hidden" asp-for="TaskId"/>
 
-        <input type="hidden" asp-for="Id" />
 
-        <label asp-for="TaskName">Task</label>
-        <input asp-for="TaskName" required />
-        <br /><br />
-
-       
-        <label asp-for="DueDate">Due Date</label>
-        <input asp-for="DueDate"/>
-        <br /><br />
-        
-        <label asp-for="Quadrant">Quadrant</label>
-        <select asp-for="Quadrant">
-
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-
-        </select>
-        <br /><br />
-
-        <label asp-for="Category" required>Category</label>
-        <select asp-for="Category">
-
-            <option value="Home">Home</option>
-            <option value="School">School</option>
-            <option value="Work">Work</option>
-            <option value="Church">Church</option>
-
-        </select>
-        <br /><br />
-        <label asp-for="Completed">Completed?</label>
-        <div>
-            <input type="radio" asp-for="Completed" value="true" id="completed-yes" />
-            <label for="edited-yes">Yes</label>
-
-            <input type="radio" asp-for="Completed" value="false" id="completed-no" />
-            <label for="edited-no">No</label>
+        <div class="row">
+            <div class="col-12">
+                <label asp-for="TaskName" class="form-label">Task Name</label>
+                <input type="text"  asp-for="TaskName" class="form-control" required />
+            </div>
         </div>
-        <br/>
 
-        <button type="submit">Submit</button>
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <label asp-for="DueDate" class="form-label">Due Date</label>
+                <input type="datetime-local"  asp-for="DueDate" class="form-control"
+                       value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" required />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <label asp-for="Quadrant" class="form-label">Quadrant</label>
+                <select asp-for="Quadrant" class="form-select" required>
+                    <option value="">Select Quadrant</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <label asp-forfor="Category" class="form-label">Category</label>
+                <select asp-for="Category" class="form-select" required>
+                    <option value="">Select Category</option>
+                    
+                    <!--create a drop down using the categories in the viewbag-->
+                    @foreach (Category c in ViewBag.Categories)
+                     { 
+                         <option value="@c.Id">@c.Name</option> 
+                     }
+
+                </select>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <label class="form-label">Completed?</label>
+                <div class="form-check">
+                    <input type="radio" asp-for="Completed" value="true" id="CompletedYes" class="form-check-input" required>
+                    <label for="CompletedYes" class="form-check-label">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" asp-for="Completed" value="false" id="CompletedNo" class="form-check-input" checked required>
+                    <label for="CompletedNo" class="form-check-label">No</label>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary w-100">Submit</button>
+            </div>
+        </div>
+
 
         <div asp-validation-summary="All"></div>
-
     </form>
-
-
 </div>
