@@ -14,7 +14,7 @@
     <form asp-action="AddEditTask" method="post" class="row g-3">
 
 
-        <input type="hidden" asp-for="Id"/>
+        <input type="hidden" asp-for="TaskId"/>
 
 
         <div class="row">
@@ -60,7 +60,7 @@
                     <!--create a drop down using the categories in the viewbag-->
                     @* @foreach (Category c in ViewBag.Categories) *@
                     @* { *@
-                    @*     <option value="@c.CategoryId">@c.CategoryName</option> *@
+                    @*     <option value="@c.Id">@c.Name</option> *@
                     @* } *@
                 </select>
             </div>
