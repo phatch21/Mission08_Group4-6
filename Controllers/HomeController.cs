@@ -80,8 +80,17 @@ namespace Mission08_Group4_6.Controllers
 
         public IActionResult Checkoff(int id)
         {
-            return View("Index");
+            var task = _context.Tasks.FirstOrDefault(t => t.Id == id); // Find task by ID
+
+            if (task != null) // Ensure the task exists
+            {
+                task.Completed = true; // Update the Completed field
+                _context.SaveChanges(); // Save changes to the database
+            }
+
+            return RedirectToAction("Index"); // Redirect to Index or the appropriate view
         }
+
     }
 }
 
