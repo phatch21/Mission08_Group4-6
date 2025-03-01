@@ -138,9 +138,5 @@ namespace Mission08_Group4_6.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
