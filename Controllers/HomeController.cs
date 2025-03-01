@@ -24,6 +24,7 @@ namespace Mission08_Group4_6.Controllers
         [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
+
             ViewBag.Categories = _taskRepository.GetAllCategories()
                 .Select(c => new { Id = c.Id, Name = c.Name }) // Ensuring only relevant properties
                 .ToList();
@@ -71,6 +72,39 @@ namespace Mission08_Group4_6.Controllers
         }
 
 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            
+            var taskToEdit = _context.Tasks
+                .Include(x => x.Category)
+                .Single(x => x.Id == id);  
+            
+            var tasks = _context.Tasks.ToList();
+            
+            ViewBag.Categories = _context.Categories.ToList();
+            
+            return View("Index", tasks);
+            
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NewTask model)
+        {
+            _context.Tasks.Update(model);
+            _context.SaveChanges();
+            
+
+            return RedirectToAction("Index");
+        }
+        
+        
         // ? Delete Task (GET Confirmation)
         [HttpGet]
         public IActionResult Delete(int id)
@@ -113,12 +147,11 @@ namespace Mission08_Group4_6.Controllers
             return RedirectToAction("Index");
         }
 
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
 
     }
 }
