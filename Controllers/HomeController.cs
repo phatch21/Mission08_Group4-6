@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Group4_6.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -60,18 +61,38 @@ namespace Mission08_Group4_6.Controllers
             return View(model);
         }
 
-        // ? Edit Task (Now uses [HttpPost])
-        [HttpPost]
-        public IActionResult Edit(NewTask updatedTask)
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            if (updatedTask != null)
-            {
-                _context.Tasks.Update(updatedTask);
-                _context.SaveChanges();
-            }
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            
+            var taskToEdit = _context.Tasks
+                .Include(x => x.Category)
+                .Single(x => x.Id == id);  
+            
+            var tasks = _context.Tasks.ToList();
+            
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("Index", tasks);
+            
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NewTask model)
+        {
+            _context.Tasks.Update(model);
+            _context.SaveChanges();
+            
 
             return RedirectToAction("Index");
         }
+        
+        
 
         // ? Delete Task (GET Confirmation)
         [HttpGet]
