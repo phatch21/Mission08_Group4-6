@@ -1,17 +1,10 @@
-using System.ComponentModel.DataAnnotations;
 
-namespace Mission08_Group4_6.Models;
-
-public class Category
+﻿namespace Mission08_Group4_6.Models
 {
-    [Key]
-    public int CategoryId { get; set; }
-    
-    [Required]
-    public string CategoryName { get; set; }
-    
-    [Required]
-    public int Id { get; set; }
-    public NewTask NewTask { get; set; }
-    
+    public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }
+

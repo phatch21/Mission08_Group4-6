@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mission08_Group4_6.Models;
 
@@ -10,9 +11,11 @@ using Mission08_Group4_6.Models;
 namespace Mission08_Group4_6.Migrations
 {
     [DbContext(typeof(TaskDbContext))]
-    partial class TaskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250228231957_InitialCreate2")]
+    partial class InitialCreate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
@@ -30,28 +33,6 @@ namespace Mission08_Group4_6.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Home"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "School"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Work"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Church"
-                        });
                 });
 
             modelBuilder.Entity("Mission08_Group4_6.Models.NewTask", b =>
