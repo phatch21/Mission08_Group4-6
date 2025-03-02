@@ -1,11 +1,14 @@
-@{}
+@{
+}
 
+<!-- Form that confirms if the user wants to delete -->
 @model NewTask
 
 <h2>Confirm Deletion</h2>
-<h3>@Model.TaskName</h3>
-<form method="post">
+<p>Are you sure you want to delete the task: <strong>@Model.TaskName</strong>?</p>
+
+<form asp-action="DeleteConfirmed" method="post">
     <input type="hidden" asp-for="Id" />
-    <button type="submit">Delete</button>
-    <a class="btn btn-info" asp-controller="Home" asp-action="Index">Cancel</a>
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 </form>

@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿// Emma Helquist, Payton Hatch, Tessa Miner, Addison Smith
+// Group 4-6
+
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Mission08_Group4_6.Models;
-using System.Linq;
 
 namespace Mission08_Group4_6.Controllers
 {
@@ -9,18 +11,20 @@ namespace Mission08_Group4_6.Controllers
     {
         private readonly ITaskRepository _taskRepository;
 
+        // Constructor
         public HomeController(ITaskRepository taskRepository)
         {
             _taskRepository = taskRepository;
         }
 
-        // ? Display Task List
+        // Display Task List, main page
         public IActionResult Index()
         {
-            var tasks = _taskRepository.GetAllTasks();
+            var tasks = _taskRepository.GetAllTasks().ToList();
             return View(tasks);
         }
 
+        // Get for adding a new task
         [HttpGet]
         public IActionResult AddEditTask(int? id)
         {
@@ -42,9 +46,8 @@ namespace Mission08_Group4_6.Controllers
 
             return View(task);
         }
-
-
-
+        
+        // Post for adding a new task
         [HttpPost]
         public IActionResult AddEditTask(NewTask model)
         {
@@ -73,11 +76,13 @@ namespace Mission08_Group4_6.Controllers
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        // Get to edit a task
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -90,10 +95,10 @@ namespace Mission08_Group4_6.Controllers
 
             ViewBag.Categories = _taskRepository.GetAllCategories().ToList();
 
-            return View(taskToEdit);
+            return View("AddEditTask", taskToEdit);
         }
-
-
+        
+        // Post to update an edited task
         [HttpPost]
         public IActionResult Edit(NewTask model)
         {
@@ -105,45 +110,48 @@ namespace Mission08_Group4_6.Controllers
 
             return RedirectToAction("Index");
         }
-
-
-
-        // ? Delete Task (GET Confirmation)
+        
+        // Delete Task (GET)
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var recordToDelete = _taskRepository.GetTaskById(id); // Use _taskRepository
+            var recordToDelete = _taskRepository.GetTaskById(id);
             if (recordToDelete == null)
             {
                 return NotFound();
             }
 
-            return View(recordToDelete);
+            return View(recordToDelete); // Ensure Delete.cshtml exists
         }
 
-        // ? Confirm and Perform Delete
+
+        // Confirm and Perform Delete
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
-            var recordToDelete = _taskRepository.GetTaskById(id); // Use _taskRepository
-            if (recordToDelete != null)
+            var recordToDelete = _taskRepository.GetTaskById(id);
+
+            if (recordToDelete == null)
             {
-                _taskRepository.Delete(id); // Use _taskRepository
-                _taskRepository.Save();
+                return NotFound(); // Handle case where task is already deleted
             }
+
+            _taskRepository.Delete(id);
+            _taskRepository.Save();
 
             return RedirectToAction("Index");
         }
 
-        // ? Checkoff Task (Mark as Completed)
+
+        // Checkoff Task (Mark as Completed)
         public IActionResult Checkoff(int id)
         {
-            var task = _taskRepository.GetTaskById(id); // Use _taskRepository
+            var task = _taskRepository.GetTaskById(id); 
 
             if (task != null)
             {
                 task.Completed = true;
-                _taskRepository.Update(task); // Save the update
+                _taskRepository.Update(task); 
                 _taskRepository.Save();
             }
 
